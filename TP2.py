@@ -1,9 +1,9 @@
 """
 TP2 : Système de gestion de livres pour une bibliothèque
 
-Groupe de laboratoire : XX
-Numéro d'équipe :  YY
-Noms et matricules : Nom1 (Matricule1), Nom2 (Matricule2)
+Groupe de laboratoire : 01
+Numéro d'équipe :  03
+Noms et matricules : Abbas, Usalas (Matricule1), Nguyen Le, Williamg (2393842)
 """
 
 ########################################################################################################## 
