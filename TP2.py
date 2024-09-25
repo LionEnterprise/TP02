@@ -14,17 +14,17 @@ Noms et matricules : Abbas, Usalas (2383986), Nguyen Le, Williamg (2393842)
 import csv
 
 
-csvfile = open('collection_bibliotheque.csv', newline='')
+csvfile = open('collection_bibibliotheque.csv', newline='')
 c = csv.reader(csvfile)
-collection_livre = []
+bibliotheque = []
 
 for row in c:
    # print(row)
-    collection_livre.append(row)
+    bibliotheque.append(row)
 
 csvfile.close()
 
-print(collection_livre)
+print(bibliotheque)
 
 ########################################################################################################## 
 # PARTIE 2 : Ajout d'une nouvelle collection à la bibliothèque
