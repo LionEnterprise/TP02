@@ -11,8 +11,19 @@ Noms et matricules : Abbas, Usalas (Matricule1), Nguyen Le, Williamg (2393842)
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
+
 import csv
-print("test")
+
+csvfile = open('collection_bibliotheque.csv', newline='')
+c = csv.reader(csvfile)
+bibliotheque = []
+#print(type(bibliotheque))
+
+for row in c:
+    #print(row)
+    #collection_livre.append[row]
+print(f' \n Bibliotheque initiale : {bibliotheque} \n')
+csvfile.close()
 
 
 
