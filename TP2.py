@@ -11,6 +11,7 @@ Noms et matricules : Abbas, Usalas (2383986), Nguyen Le, Williamg (2393842)
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
+import csv
 
 import csv
 
