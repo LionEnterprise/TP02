@@ -59,7 +59,3 @@ Noms et matricules : Abbas, Usalas (Matricule1), Nguyen Le, Williamg (2393842)
 # TODO : Écrire votre code ici
 
 
-
-
-
-
