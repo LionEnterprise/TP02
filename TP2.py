@@ -14,7 +14,7 @@ Noms et matricules : Abbas, Usalas (2383986), Nguyen Le, Williamg (2393842)
 import csv
 
 
-csvfile = open('collection_bibibliotheque.csv', newline='')
+csvfile = open('collection_bibliotheque.csv', newline='')
 c = csv.reader(csvfile)
 bibliotheque = []
 
@@ -24,7 +24,7 @@ for row in c:
 
 csvfile.close()
 
-print(bibliotheque)
+#print(bibliotheque)
 
 ########################################################################################################## 
 # PARTIE 2 : Ajout d'une nouvelle collection à la bibliothèque
@@ -32,8 +32,22 @@ print(bibliotheque)
 
 # TODO : Écrire votre code ici
 
+nouvelle_coll = open('nouvelle_collection.csv', newline='')
+z = csv.reader(nouvelle_coll)
+boolean = False
+
+for row in z:
+        for i in bibliotheque:
+            if i[3] == row[3]: print("DUPLCIATES -->", row) ; boolean=False
+        if (boolean) : bibliotheque.append(row)
+        boolean = True
 
 
+
+
+csvfile.close()
+
+#print(bibliotheque)
 
 
 
@@ -43,7 +57,9 @@ print(bibliotheque)
 
 # TODO : Écrire votre code ici
 
-
+for i in bibliotheque:
+    i[3] = i[3].replace("S","WS")
+    print(f' \n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 
 
