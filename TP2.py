@@ -45,7 +45,7 @@ for row in z:
 
 
 
-csvfile.close()
+nouvelle_coll.close()
 
 #print(bibliotheque)
 
@@ -59,7 +59,7 @@ csvfile.close()
 
 for i in bibliotheque:
     i[3] = i[3].replace("S","WS")
-    print(f' \n Bibliotheque avec modifications de cote : {bibliotheque} \n')
+    #print(f' \n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 
 
@@ -71,10 +71,25 @@ for i in bibliotheque:
 
 # TODO : Écrire votre code ici
 
+#ajout des clées
+bibliotheque[0].append("emprunts")
+bibliotheque[0].append("date_emprunt")
+for i in range(1, len(bibliotheque)):
+     bibliotheque[i].append("disponible")
+     bibliotheque[i].append("")
+
+#affectation de la liste emprunts.csv
+
+emprunts = open('emprunts.csv', newline='')
+y = csv.reader(emprunts)
 
 
 
+for row in y:
+     for i in range(1, len(bibliotheque)):
+          if (bibliotheque[i][3] == row[0]): bibliotheque[i][4] = "emprunté" ; bibliotheque[i][5] = row[1]
 
+emprunts.close()
 
 
 ########################################################################################################## 
@@ -82,5 +97,12 @@ for i in bibliotheque:
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
+import datetime
 
+delaie = datetime.timedelta(days=-30)
+date = datetime.date.today().__add__(delaie)
 
+test = datetime.date(int(bibliotheque[5][5][0:4]) , int(bibliotheque[5][5][5:7]) , int(bibliotheque[5][5][8:10]))
+
+for i in bibliotheque:
+     if (i[4]== "emprunté" and datetime.date(int(i[5][0:4]), int(i[5][5:7]), int(i[5][8:10]))  < date   ): print(i)
