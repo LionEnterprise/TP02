@@ -26,8 +26,8 @@ for row in c:
         "date_publication" : date_publication
     }
 csvfile.close()
-print(bibliotheque["P021"])
-print(bibliotheque["H007"])
+#print(bibliotheque["P021"])
+#print(bibliotheque["H007"])
 print(f' \n Bibliotheque initiale : {bibliotheque} \n')
 
 ########################################################################################################## 
@@ -35,29 +35,31 @@ print(f' \n Bibliotheque initiale : {bibliotheque} \n')
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
-#i=1
-#csvfile = open('nouvelle_collection.csv', newline='')
-#c = csv.reader(csvfile)
-#print(len(cote_rangement))
-#for ligne in c:
-    #while i < len(cote_rangement):
-        #if cote_rangement[i] == ligne[3]:
-            #print("")
-            #print(f"Le livre {cote_rangement[i]} ---- {titre[i]} par {auteur[i]} ---- a été ajouté avec succès")
-            #print(cote_rangement[i])
-            #print(ligne[3])
-        #else:
-            #print("")
-            #print(fLe livre {cote_rangement[i]} ---- {titre[i]} par {auteur[i]} ---- est déjà présent dans la bibliothèque")
-            #print(cote_rangement[i])
-            #print(ligne[3])
-            #print(i)
-        #i = i+1
-    #print(i)
-#csvfile.close()
 
+#IL Y A 24 AJOUTÉ ET 6 DUP
 
+N_csvfile = open("nouvelle_collection.csv")
+N_c = csv.reader(N_csvfile)
+next(N_c)
 
+for N_row in N_c:
+    N_titre, N_auteur, N_date_publication, N_cote_rangement = N_row
+
+    # Check if the cote_rangement is already in the bibliotheque
+    if N_cote_rangement in bibliotheque:
+        print(
+            f"Le livre {N_cote_rangement} ---- {N_titre} par {N_auteur} ---- est déjà présent dans la bibliothèque")
+    else:
+        bibliotheque[N_cote_rangement] = {
+            "titre": N_titre,
+            "auteur": N_auteur,
+            "date_publication": N_date_publication
+        }
+        print(f"Le livre {N_cote_rangement} ---- {N_titre} par {N_auteur} ---- a été ajouté avec succès")
+
+N_csvfile.close()
+
+print(f'\n Bibliotheque finale : {bibliotheque} \n')
 
 
 ########################################################################################################## 
