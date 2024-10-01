@@ -1,3 +1,4 @@
+import csv
 """
 TP2 : Système de gestion de livres pour une bibliothèque
 
@@ -11,7 +12,7 @@ Noms et matricules : Abbas, Usalas (Matricule1), Nguyen Le, William (2393842)
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
-import csv
+
 
 bibliotheque = {}
 
@@ -26,8 +27,7 @@ for row in c:
         "date_publication" : date_publication
     }
 csvfile.close()
-print(bibliotheque["P021"])
-#print(bibliotheque["H007"])
+#print(bibliotheque["P021"])
 print(f' \n Bibliotheque initiale : {bibliotheque} \n')
 
 ########################################################################################################## 
@@ -45,7 +45,6 @@ next(N_c)
 for N_row in N_c:
     N_titre, N_auteur, N_date_publication, N_cote_rangement = N_row
 
-    # Check if the cote_rangement is already in the bibliotheque
     if N_cote_rangement in bibliotheque:
         print(f"Le livre {N_cote_rangement} ---- {N_titre} par {N_auteur} ---- est déjà présent dans la bibliothèque")
     else:
@@ -74,10 +73,8 @@ for key in bibliotheque:
     else:
         N_bibliotheque[key] = bibliotheque[key]
 
+
 bibliotheque = N_bibliotheque
-#for key in bibliotheque:
-#    if key[0:1] == ["WS"]:
-#        print(bibliotheque[key])
 
 print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
