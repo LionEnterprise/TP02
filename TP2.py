@@ -26,7 +26,7 @@ for row in c:
         "date_publication" : date_publication
     }
 csvfile.close()
-#print(bibliotheque["P021"])
+print(bibliotheque["P021"])
 #print(bibliotheque["H007"])
 print(f' \n Bibliotheque initiale : {bibliotheque} \n')
 
@@ -47,8 +47,7 @@ for N_row in N_c:
 
     # Check if the cote_rangement is already in the bibliotheque
     if N_cote_rangement in bibliotheque:
-        print(
-            f"Le livre {N_cote_rangement} ---- {N_titre} par {N_auteur} ---- est déjà présent dans la bibliothèque")
+        print(f"Le livre {N_cote_rangement} ---- {N_titre} par {N_auteur} ---- est déjà présent dans la bibliothèque")
     else:
         bibliotheque[N_cote_rangement] = {
             "titre": N_titre,
@@ -67,8 +66,20 @@ print(f'\n Bibliotheque finale : {bibliotheque} \n')
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
+N_bibliotheque = {}
+for key in bibliotheque:
+    if bibliotheque[key]['auteur'] == "William Shakespeare":
+        N_key = "WS" + key[1:]
+        N_bibliotheque[N_key] = bibliotheque[key]
+    else:
+        N_bibliotheque[key] = bibliotheque[key]
 
+bibliotheque = N_bibliotheque
+#for key in bibliotheque:
+#    if key[0:1] == ["WS"]:
+#        print(bibliotheque[key])
 
+print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 
 
