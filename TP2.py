@@ -88,18 +88,33 @@ print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
-
 emprunts = {}
+csvfile = open("emprunts.csv")
+#emprunts = {cle: value for cle, value in csvfile}
+c = csv.reader(csvfile)
+next(c)
+for row in c:
+    cote_rangement, date_emprunt = row
+    emprunts[cote_rangement] = {date_emprunt}
 
-for cote, details in bibliotheque.items():
-    if cote in emprunts:
-        bibliotheque[cote]["emprunts"] = "emprunté"
-        bibliotheque[cote]["date_emprunt"] = emprunts[cote]
+print(emprunts)
+
+# with open('emprunts.csv') as file:
+#     file = csv.reader(file)
+#     for i in file:
+#         cote, date_emprunt = i
+#         emprunts[cote] = date_emprunt
+#         print(i[0])
+
+for cle, details in bibliotheque.items():
+    if cle in emprunts:
+        bibliotheque[cle]["emprunts"] = "emprunté"
+        bibliotheque[cle]["date_emprunt"] = emprunts[cle]
     else:
-        bibliotheque[cote]["emprunts"] = "disponible"
-        bibliotheque[cote]["date_emprunt"] = None
+        bibliotheque[cle]["emprunts"] = "disponible"
+        bibliotheque[cle]["date_emprunt"] = None
 
-#print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
+print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 ########################################################################################################## 
 # PARTIE 5 : Livres en retard 
@@ -107,4 +122,17 @@ for cote, details in bibliotheque.items():
 
 # TODO : Écrire votre code ici
 
+date_mtn = str(datetime.datetime.now())[:10]
+print(type(date_mtn))
+test = datetime.datetime.strptime(date_mtn, "%Y-%m-%d")
+print(test)
+difference_date = 0
+for cle in bibliotheque:
+    if bibliotheque[cle]['emprunts'] == "emprunté":
+        print(date_mtn)
+        #difference_date = (date_actuelle - date_emprunt).days
+        if difference_date >30:
+            print("Retard 2$")
 
+
+print(f' \n Bibliotheque avec ajout des retards et frais : {bibliotheque} \n')
