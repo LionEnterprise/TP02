@@ -1,4 +1,5 @@
 import csv
+import datetime
 """
 TP2 : Système de gestion de livres pour une bibliothèque
 
@@ -88,11 +89,17 @@ print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 # TODO : Écrire votre code ici
 
+emprunts = {}
 
+for cote, details in bibliotheque.items():
+    if cote in emprunts:
+        bibliotheque[cote]["emprunts"] = "emprunté"
+        bibliotheque[cote]["date_emprunt"] = emprunts[cote]
+    else:
+        bibliotheque[cote]["emprunts"] = "disponible"
+        bibliotheque[cote]["date_emprunt"] = None
 
-
-
-
+#print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 ########################################################################################################## 
 # PARTIE 5 : Livres en retard 
