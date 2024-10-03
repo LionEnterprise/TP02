@@ -1,5 +1,5 @@
 import csv
-import datetime
+from datetime import datetime
 """
 TP2 : Système de gestion de livres pour une bibliothèque
 
@@ -88,25 +88,16 @@ print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 ########################################################################################################## 
 
 # TODO : Écrire votre code ici
+
 emprunts = {}
 csvfile = open("emprunts.csv")
-#emprunts = {cle: value for cle, value in csvfile}
 c = csv.reader(csvfile)
 next(c)
 for row in c:
     cote_rangement, date_emprunt = row
-    emprunts[cote_rangement] = {date_emprunt}
+    emprunts[cote_rangement] = date_emprunt
 
-print(emprunts)
-
-# with open('emprunts.csv') as file:
-#     file = csv.reader(file)
-#     for i in file:
-#         cote, date_emprunt = i
-#         emprunts[cote] = date_emprunt
-#         print(i[0])
-
-for cle, details in bibliotheque.items():
+for cle in bibliotheque:
     if cle in emprunts:
         bibliotheque[cle]["emprunts"] = "emprunté"
         bibliotheque[cle]["date_emprunt"] = emprunts[cle]
@@ -122,17 +113,26 @@ print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 # TODO : Écrire votre code ici
 
-date_mtn = str(datetime.datetime.now())[:10]
-print(type(date_mtn))
-test = datetime.datetime.strptime(date_mtn, "%Y-%m-%d")
-print(test)
+date_mtn = (datetime.now())
+            #.strftime("%Y-%m-%d"))
 difference_date = 0
 for cle in bibliotheque:
     if bibliotheque[cle]['emprunts'] == "emprunté":
-        print(date_mtn)
-        #difference_date = (date_actuelle - date_emprunt).days
-        if difference_date >30:
-            print("Retard 2$")
+        date_emprunt = datetime.strptime(bibliotheque[cle]['date_emprunt'], "%Y-%m-%d")
+        difference_date = (date_mtn - date_emprunt).days
 
+        if difference_date <30:
+            bibliotheque[cle]["frais_retard"] = difference_date*2
+            print(bibliotheque[cle])
+
+        elif difference_date > 50 and difference_date < 365:
+            bibliotheque[cle]["frais_retard"] = "100"
+            print(bibliotheque[cle])
+
+        else:
+            bibliotheque[cle]["livres_perdus"] = "Perdu"
+
+#    else:
+#        bibliotheque[cle]["frais_retard"] = None
 
 print(f' \n Bibliotheque avec ajout des retards et frais : {bibliotheque} \n')
