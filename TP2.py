@@ -60,7 +60,7 @@ for N_row in N_c:
 
 N_csvfile.close()
 
-print(f'\n Bibliotheque finale : {bibliotheque} \n')
+print(f'\n Bibliotheque avec la nouvelle collection : {bibliotheque} \n')
 
 ########################################################################################################## 
 # PARTIE 3 : Modification de la cote de rangement d'une sélection de livres
@@ -70,9 +70,9 @@ print(f'\n Bibliotheque finale : {bibliotheque} \n')
 
 N_bibliotheque = {}
 
-for key in bibliotheque
+for key in bibliotheque:
 
-    if bibliotheque[key]['auteur'] == "William Shakespeare":
+    if bibliotheque[key]['auteur'] == "William Shakespeare" and key[0] == "S":
         N_key = "WS" + key[1:]
         N_bibliotheque[N_key] = bibliotheque[key]
 
@@ -111,7 +111,7 @@ for cle in bibliotheque:
 
 csvfile.close()
 
-print(f'\n Bibliotheque avec modifications de cote : {bibliotheque} \n')
+print(f'\n Bibliotheque avec ajout des emprunts : {bibliotheque} \n')
 
 ########################################################################################################## 
 # PARTIE 5 : Livres en retard 
