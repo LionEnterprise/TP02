@@ -13,16 +13,19 @@ Noms et matricules : Abbas, Usalas (2383986), Nguyen Le, Williamg (2393842)
 # TODO : Écrire votre code ici
 import csv
 
-
 csvfile = open('collection_bibliotheque.csv', newline='')
 c = csv.reader(csvfile)
-bibliotheque = []
+bibliotheque = {}
 
 for row in c:
-   # print(row)
-    bibliotheque.append(row)
+     info = {}
+     info["titre"] = row[0]
+     info["auteur"] = row[1]
+     info["date_publication"] = row[2]
+     bibliotheque[row[3]] = info
 
 csvfile.close()
+print(f' \n Bibliotheque initiale : {bibliotheque} \n')
 
 #print(bibliotheque)
 
@@ -34,20 +37,18 @@ csvfile.close()
 
 nouvelle_coll = open('nouvelle_collection.csv', newline='')
 z = csv.reader(nouvelle_coll)
-boolean = False
 
 for row in z:
-        for i in bibliotheque:
-            if i[3] == row[3]: print("DUPLCIATES -->", row) ; boolean=False
-        if (boolean) : bibliotheque.append(row)
-        boolean = True
-
-
-
+     if (row[3] in bibliotheque): print("Le livre {row[3]} ---- {row[0]} par {row[1]} ---- est déjà présent dans la bibliothèque")
+     else: print("Le livre {row[3]} ---- {row[0]} par {row[1]} ---- a été ajouté avec succès")
+     info = {}
+     info["titre"] = row[0]
+     info["auteur"] = row[1]
+     info["date_publication"] = row[2]
+     bibliotheque[row[3]] = info
 
 nouvelle_coll.close()
 
-#print(bibliotheque)
 
 
 
@@ -57,13 +58,19 @@ nouvelle_coll.close()
 
 # TODO : Écrire votre code ici
 
-for i in bibliotheque:
-    i[3] = i[3].replace("S","WS")
-    #print(f' \n Bibliotheque avec modifications de cote : {bibliotheque} \n')
+#for i in bibliotheque:
+#    i[3] = i[3].replace("S","WS")
+#    #print(f' \n Bibliotheque avec modifications de cote : {bibliotheque} \n')
+
+change_list = []
+for i in bibliotheque.values():
+    if "William Shakespeare" in i["titre"]: change_list.append(i)
+
+for i in change_list:
+     bibliotheque["W" + i] = bibliotheque.pop(i)
 
 
-
-
+print(f' \n Bibliotheque avec modifications de cote : {bibliotheque} \n')
 
 ########################################################################################################## 
 # PARTIE 4 : Emprunts et retours de livres
@@ -71,25 +78,26 @@ for i in bibliotheque:
 
 # TODO : Écrire votre code ici
 
-#ajout des clées
-bibliotheque[0].append("emprunts")
-bibliotheque[0].append("date_emprunt")
-for i in range(1, len(bibliotheque)):
-     bibliotheque[i].append("disponible")
-     bibliotheque[i].append("")
-
 #affectation de la liste emprunts.csv
+
+#ajout des clées
+for i in bibliotheque:
+     bibliotheque[i]["emprunts"] = "disponible"
+     bibliotheque[i]["date_emprunt"] = ""
 
 emprunts = open('emprunts.csv', newline='')
 y = csv.reader(emprunts)
 
 
-
 for row in y:
-     for i in range(1, len(bibliotheque)):
-          if (bibliotheque[i][3] == row[0]): bibliotheque[i][4] = "emprunté" ; bibliotheque[i][5] = row[1]
+     bibliotheque[row[0]]["emprunts"] = "emprunté"
+     bibliotheque[row[0]]["date_emprunt"] = row[1]
+
+bibliotheque["cote_rangement"]["emprunts"] = "disponible"
 
 emprunts.close()
+
+print(f' \n Bibliotheque avec ajout des emprunts : {bibliotheque} \n')
 
 
 ########################################################################################################## 
@@ -102,7 +110,19 @@ import datetime
 delaie = datetime.timedelta(days=-30)
 date = datetime.date.today().__add__(delaie)
 
-test = datetime.date(int(bibliotheque[5][5][0:4]) , int(bibliotheque[5][5][5:7]) , int(bibliotheque[5][5][8:10]))
-
 for i in bibliotheque:
-     if (i[4]== "emprunté" and datetime.date(int(i[5][0:4]), int(i[5][5:7]), int(i[5][8:10]))  < date   ): print(i)
+     bibliotheque[i]["frais_retard"] = 0
+     bibliotheque[i]["livre_perdus"] = "non"
+
+for i in bibliotheque.values():
+     if (i["emprunts"]== "emprunté"):
+          date_emprunt = datetime.date(int(i["date_emprunt"][0:4]), int(i["date_emprunt"][5:7]), int(i["date_emprunt"][8:10]))
+          delaie_emprunt = (date - date_emprunt)
+          if ( 50 >= delaie_emprunt.days > 30):
+            i["frais_retard"] = delaie_emprunt.days*2
+          if (delaie_emprunt.days > 50):
+               i["frais_retard"] = 100
+          if (delaie_emprunt.days > 365):
+               i["livre_perdus"] = "oui"
+
+print(f' \n Bibliotheque avec ajout des retards et frais : {bibliotheque} \n')
