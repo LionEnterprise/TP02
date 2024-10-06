@@ -39,8 +39,8 @@ nouvelle_coll = open('nouvelle_collection.csv', newline='')
 z = csv.reader(nouvelle_coll)
 
 for row in z:
-     if (row[3] in bibliotheque): print("Le livre {row[3]} ---- {row[0]} par {row[1]} ---- est déjà présent dans la bibliothèque")
-     else: print("Le livre {row[3]} ---- {row[0]} par {row[1]} ---- a été ajouté avec succès")
+     if (row[3] in bibliotheque): print("Le livre ", row[3], " ---- ", row[0], " par ", row[1], " ---- est déjà présent dans la bibliothèque")
+     else: print("Le livre ", row[3], " ---- ", row[0], " par ", row[1], " ---- a été ajouté avec succès")
      info = {}
      info["titre"] = row[0]
      info["auteur"] = row[1]
